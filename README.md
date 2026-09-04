@@ -2,7 +2,7 @@
 
 Dự án tự học và cài đặt các thuật toán Machine Learning từ con số 0 bằng Python và NumPy, không sử dụng các mô hình đóng gói sẵn của Scikit-Learn nhằm hiểu sâu bản chất toán học và thuật toán tối ưu.
 
----
+
 
 ## Mục tiêu dự án
 
@@ -10,7 +10,7 @@ Dự án tự học và cài đặt các thuật toán Machine Learning từ con
 - **Kỹ thuật vector hóa:** Tối ưu hóa tính toán trên ma trận/vector bằng NumPy, hạn chế tối đa vòng lặp.
 - **Xử lý dữ liệu:** Tự xây dựng các bước tiền xử lý (chuẩn hóa đặc trưng, xử lý dữ liệu thiếu) và trực quan hóa kết quả bằng Matplotlib.
 
----
+ 
 
 ## Cấu trúc thư mục
 
@@ -28,7 +28,7 @@ Machine-Learning-from-scratch/
 └── README.md
 ```
 
----
+ 
 
 ## Các thuật toán đã triển khai
 
@@ -44,7 +44,7 @@ Machine-Learning-from-scratch/
   - Cập nhật Gradient Descent: $w := w - \alpha \frac{\partial J}{\partial w}, \quad b := b - \alpha \frac{\partial J}{\partial b}$
 - **Kết quả:** Learning rate $\alpha = 0.001$, 10.000 epochs. Nghiệm hội tụ: $w \approx 9876.97, b \approx 22914.69$.
 
----
+ 
 
 ### 2. Hồi quy Logistic (Logistic Regression)
 
@@ -60,7 +60,7 @@ Machine-Learning-from-scratch/
 - **Tiền xử lý:** Chuẩn hóa Z-score trực tiếp bằng NumPy ($X_{\text{scaled}} = \frac{X - \mu}{\sigma}$).
 - **Kết quả:** Learning rate $\alpha = 0.01$, 10.000 epochs. Chi phí giảm từ `0.6899` về `0.0595`. Độ chính xác đạt **98.00%**.
 
----
+ 
 
 ### 3. K láng giềng gần nhất (K-Nearest Neighbors)
 
@@ -72,7 +72,7 @@ Machine-Learning-from-scratch/
 - **Tiền xử lý:** Chuẩn hóa đặc trưng bằng `StandardScaler`, chia tập Train/Test tỉ lệ 80/20.
 - **Kết quả:** Độ chính xác đạt **98.25%** với $k = 3$.
 
----
+ 
 
 ## Cài đặt & Sử dụng
 
@@ -91,7 +91,7 @@ jupyter notebook
 ```
 Mở notebook tương ứng trong từng thư mục để xem mã nguồn và kết quả chạy trực quan.
 
----
+ 
 
 ## Lộ trình phát triển (Roadmap)
 
@@ -114,7 +114,7 @@ Mở notebook tương ứng trong từng thư mục để xem mã nguồn và k�
 - [ ] Perceptron
 - [ ] Multi-Layer Perceptron (MLP with Backpropagation)
 
----
+ 
 
 ## Tài liệu tham khảo
 
@@ -122,7 +122,7 @@ Mở notebook tương ứng trong từng thư mục để xem mã nguồn và k�
 2. Machine Learning Cơ Bản – Vũ Hữu Tiệp (machinelearningcoban.com)
 3. Python Data Science Handbook – Jake VanderPlas
 
----
+ 
 
 ## Giấy phép (License)
 
