@@ -1,145 +1,129 @@
 # Machine Learning from Scratch
 
-Dự án cá nhân lưu trữ quá trình tự học, nghiên cứu và tự cài đặt (implement from scratch) các thuật toán **Học máy (Machine Learning)** từ con số 0 bằng Python và NumPy, không sử dụng các thư viện black-box (như mô hình có sẵn của Scikit-Learn) cho phần cốt lõi của thuật toán.
+Dự án tự học và cài đặt các thuật toán Machine Learning từ con số 0 bằng Python và NumPy, không sử dụng các mô hình đóng gói sẵn của Scikit-Learn nhằm hiểu sâu bản chất toán học và thuật toán tối ưu.
 
+---
 
 ## Mục tiêu dự án
 
-- **Hiểu sâu bản chất toán học:** Nắm vững cách các thuật toán hoạt động bên dưới lớp vỏ bọc trừu tượng (Đại số tuyến tính, Giải tích vi phân, Tối ưu hóa, Xác suất thống kê).
-- **Làm chủ kỹ thuật Vector hóa (Vectorization):** Sử dụng tối đa sức mạnh tính toán mảng nhiều chiều của `NumPy` thay cho các vòng lặp thủ công chậm chạp.
-- **Tiền xử lý và trực quan hóa dữ liệu:** Rèn luyện kỹ năng làm sạch dữ liệu, chuẩn hóa đặc trưng (Feature Scaling) và trực quan hóa quá trình hội tụ/kết quả dự đoán bằng `Matplotlib` & `Pandas`.
-- **Xây dựng nền tảng vững chắc:** Chuẩn bị tư duy logic vững vàng để tiến sâu hơn vào Deep Learning và các kiến trúc AI hiện đại.
+- **Bản chất toán học:** Nắm vững giải tích vi phân, đại số tuyến tính, hàm mất mát và thuật toán tối ưu hóa.
+- **Kỹ thuật vector hóa:** Tối ưu hóa tính toán trên ma trận/vector bằng NumPy, hạn chế tối đa vòng lặp.
+- **Xử lý dữ liệu:** Tự xây dựng các bước tiền xử lý (chuẩn hóa đặc trưng, xử lý dữ liệu thiếu) và trực quan hóa kết quả bằng Matplotlib.
 
+---
 
 ## Cấu trúc thư mục
 
 ```text
 Machine-Learning-from-scratch/
-│
 ├── knn/
-│   ├── data.csv                   # Tập dữ liệu chẩn đoán ung thư vú (Breast Cancer Wisconsin Diagnostic)
-│   └── knn.ipynb                  # Cài đặt thuật toán K-Nearest Neighbors từ đầu
-│
+│   ├── data.csv                   # Tập dữ liệu ung thư vú (Breast Cancer Diagnostic)
+│   └── knn.ipynb                  # Thuật toán K-Nearest Neighbors
 ├── linear regression/
-│   ├── Salary Data.csv            # Dữ liệu kinh nghiệm làm việc và mức lương tương ứng
-│   └── linear_regression.ipynb    # Cài đặt Hồi quy tuyến tính đơn biến với Gradient Descent
-│
-└── README.md                      # Tài liệu hướng dẫn & lộ trình dự án
+│   ├── Salary Data.csv            # Dữ liệu số năm kinh nghiệm và mức lương
+│   └── linear_regression.ipynb    # Hồi quy tuyến tính đơn biến với Gradient Descent
+├── logistic regression/
+│   ├── data_synthetic.csv         # Dữ liệu điểm thi và kết quả tuyển sinh
+│   └── logistic_regression.ipynb  # Hồi quy Logistic với Binary Cross-Entropy
+└── README.md
 ```
 
+---
 
-## Chi tiết các thuật toán đã triển khai
+## Các thuật toán đã triển khai
 
 ### 1. Hồi quy tuyến tính (Linear Regression)
 
-- **Thư mục:** `linear regression`
-- **File notebook:** `linear_regression.ipynb`
-- **Tập dữ liệu:** `Salary Data.csv`
-    - (30 mẫu: `YearsExperience` ➔ `Salary`)
-- **Bài toán:** Dự đoán mức lương liên tục dựa trên số năm kinh nghiệm làm việc.
-- **Cơ sở lý thuyết:**
-  - **Hàm giả thuyết (Hypothesis function):**
-    $$f_{w, b}(x) = w \cdot x + b$$
-  - **Hàm mất mát (Mean Squared Error - MSE Cost Function):**
-    $$J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} \left( f_{w, b}(x^{(i)}) - y^{(i)} \right)^2$$
-  - **Đạo hàm riêng (Gradients):**
-    $$\frac{\partial J}{\partial w} = \frac{1}{m} \sum_{i=1}^{m} \left( f_{w, b}(x^{(i)}) - y^{(i)} \right) x^{(i)}$$
-    $$\frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^{m} \left( f_{w, b}(x^{(i)}) - y^{(i)} \right)$$
-  - **Quy tắc cập nhật Gradient Descent:**
-    $$w := w - \alpha \frac{\partial J}{\partial w}$$
-    $$b := b - \alpha \frac{\partial J}{\partial b}$$
-- **Kết quả thực nghiệm:**
-  - Tốc độ học ($\alpha$): `0.001`, Số vòng lặp (epochs): `10000`.
-  - Tham số học được tối ưu: $w \approx 9876.97, b \approx 22914.69$.
-  - Đường hồi quy khớp chính xác xu hướng tăng lương tuyến tính theo năm kinh nghiệm.
+- **Mã nguồn:** [`linear regression/linear_regression.ipynb`](file:///d:/codevstdio/repo/Machine-Learning-from-scratch/linear%20regression/linear_regression.ipynb)
+- **Dữ liệu:** [`Salary Data.csv`](file:///d:/codevstdio/repo/Machine-Learning-from-scratch/linear%20regression/Salary%20Data.csv) (30 mẫu, dự đoán `Salary` theo `YearsExperience`).
+- **Toán học:**
+  - Giả thuyết: $f_{w,b}(x) = w x + b$
+  - Hàm mất mát MSE: $J(w, b) = \frac{1}{2m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})^2$
+  - Đạo hàm:
+    $$\frac{\partial J}{\partial w} = \frac{1}{m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)}) x^{(i)}, \quad \frac{\partial J}{\partial b} = \frac{1}{m} \sum_{i=1}^{m} (f_{w,b}(x^{(i)}) - y^{(i)})$$
+  - Cập nhật Gradient Descent: $w := w - \alpha \frac{\partial J}{\partial w}, \quad b := b - \alpha \frac{\partial J}{\partial b}$
+- **Kết quả:** Learning rate $\alpha = 0.001$, 10.000 epochs. Nghiệm hội tụ: $w \approx 9876.97, b \approx 22914.69$.
 
+---
 
-### 2. K láng giềng gần nhất (K-Nearest Neighbors - KNN)
+### 2. Hồi quy Logistic (Logistic Regression)
 
-- **Thư mục:** `knn`
-- **File notebook:** `knn.ipynb`
-- **Tập dữ liệu:** `data.csv`
-    - (569 mẫu, 30 đặc trưng y khoa về kích thước tế bào ung thư vú)
-- **Bài toán:** Phân loại nhị phân khối u là **Lành tính (Benign - B)** hay **Ác tính (Malignant - M)**.
-- **Cơ sở lý thuyết:**
-  - **Khoảng cách Euclidean:**
-    $$d(p, q) = \sqrt{\sum_{i=1}^{n} (p_i - q_i)^2}$$
-  - **Cơ chế hoạt động:**
-    1. Lưu trữ toàn bộ tập huấn luyện (Lazy Learning / Instance-based Learning).
-    2. Với mỗi điểm dữ liệu mới, tính khoảng cách Euclidean tới mọi điểm trong tập huấn luyện.
-    3. Chọn ra $k$ điểm có khoảng cách nhỏ nhất (`np.argsort`).
-    4. Bầu cử đa số (Majority Voting) bằng `Counter` để đưa ra nhãn dự đoán có tần suất xuất hiện cao nhất.
-- **Tiền xử lý dữ liệu:**
-  - Loại bỏ các cột trống (`NaN`) và cột định danh (`id`).
-  - Chuẩn hóa thang đo đặc trưng (`StandardScaler`) để tránh việc các đặc trưng có giá trị lớn lấn át khoảng cách Euclidean.
-  - Phân chia tập huấn luyện và kiểm thử (80% Train / 20% Test, `random_state=2`).
-- **Kết quả thực nghiệm:**
-  - Độ chính xác (Accuracy) trên tập kiểm thử đạt **98.25%** với $k = 3$.
-  - Trực quan hóa 2D phân bố điểm dữ liệu và nhãn dự đoán.
+- **Mã nguồn:** [`logistic regression/logistic_regression.ipynb`](file:///d:/codevstdio/repo/Machine-Learning-from-scratch/logistic%20regression/logistic_regression.ipynb)
+- **Dữ liệu:** [`data_synthetic.csv`](file:///d:/codevstdio/repo/Machine-Learning-from-scratch/logistic%20regression/data_synthetic.csv) (200 mẫu, phân loại trúng tuyển `Admitted` dựa trên `Math_Score` và `English_Score`).
+- **Toán học:**
+  - Hàm Sigmoid: $g(z) = \frac{1}{1 + e^{-z}}$ (sử dụng `np.clip(z, -250, 250)` để chống tràn số).
+  - Giả thuyết: $\hat{y} = g(X W)$ với $X$ đã bổ sung cột bias $x_0 = 1$.
+  - Hàm mất mát Binary Cross-Entropy:
+    $$J(W) = -\frac{1}{m} \sum_{i=1}^{m} \left[ y^{(i)} \log(\hat{y}^{(i)} + \epsilon) + (1 - y^{(i)}) \log(1 - \hat{y}^{(i)} + \epsilon) \right]$$
+  - Đạo hàm ma trận: $\nabla_W J = \frac{1}{m} X^T (\hat{y} - y)$
+  - Ranh giới quyết định (Decision Boundary): $w_0 + w_1 x_1 + w_2 x_2 = 0 \implies x_2 = -\frac{w_0 + w_1 x_1}{w_2}$
+- **Tiền xử lý:** Chuẩn hóa Z-score trực tiếp bằng NumPy ($X_{\text{scaled}} = \frac{X - \mu}{\sigma}$).
+- **Kết quả:** Learning rate $\alpha = 0.01$, 10.000 epochs. Chi phí giảm từ `0.6899` về `0.0595`. Độ chính xác đạt **98.00%**.
 
+---
 
-## Yêu cầu môi trường & Cài đặt
+### 3. K láng giềng gần nhất (K-Nearest Neighbors)
 
-### 1. Yêu cầu
-- **Python 3.8+**
+- **Mã nguồn:** [`knn/knn.ipynb`](file:///d:/codevstdio/repo/Machine-Learning-from-scratch/knn/knn.ipynb)
+- **Dữ liệu:** [`data.csv`](file:///d:/codevstdio/repo/Machine-Learning-from-scratch/knn/data.csv) (569 mẫu, 30 đặc trưng y tế, phân loại khối u lành tính B / ác tính M).
+- **Toán học & Giải thuật:**
+  - Khoảng cách Euclidean: $d(p, q) = \sqrt{\sum_{i=1}^{n} (p_i - q_i)^2}$
+  - Cơ chế Lazy Learning: Tính khoảng cách từ điểm mới tới toàn bộ tập huấn luyện, lấy $k$ điểm gần nhất và bỏ phiếu đa số (Majority Voting).
+- **Tiền xử lý:** Chuẩn hóa đặc trưng bằng `StandardScaler`, chia tập Train/Test tỉ lệ 80/20.
+- **Kết quả:** Độ chính xác đạt **98.25%** với $k = 3$.
+
+---
+
+## Cài đặt & Sử dụng
+
+### 1. Yêu cầu môi trường
+- Python 3.8+
 - Các thư viện cần thiết:
-  - `numpy`: Xử lý mảng và đại số tuyến tính
-  - `pandas`: Đọc và thao tác với tập dữ liệu bảng
-  - `matplotlib`: Trực quan hóa dữ liệu và biểu đồ học tập
-  - `scikit-learn`: Sử dụng riêng cho các bước tiện ích tiền xử lý (`train_test_split`, `StandardScaler`)
-  - `jupyter` / `notebook`: Môi trường tương tác dòng lệnh
-
-### 2. Cài đặt các thư viện
-Bạn có thể cài đặt toàn bộ các thư viện hỗ trợ bằng lệnh:
-
 ```bash
 pip install numpy pandas matplotlib scikit-learn notebook
 ```
 
-### 3. Khởi chạy dự án
-Clone repository về máy và mở Jupyter Notebook:
-
+### 2. Chạy dự án
 ```bash
 git clone https://github.com/BaThanhHuynh/Machine-Learning-from-scratch.git
 cd Machine-Learning-from-scratch
 jupyter notebook
 ```
+Mở notebook tương ứng trong từng thư mục để xem mã nguồn và kết quả chạy trực quan.
 
-Sau đó duyệt vào từng thư mục (`knn/` hoặc `linear regression/`) và mở file `.ipynb` tương ứng để chạy từng ô lệnh (cell).
-
+---
 
 ## Lộ trình phát triển (Roadmap)
 
-Dự án đang liên tục được bổ sung các thuật toán mới theo lộ trình:
-
 ### Học có giám sát (Supervised Learning)
-- **Linear Regression (Simple Gradient Descent)** - Đã hoàn thành
-- **K-Nearest Neighbors (KNN Classifier)** - Đã hoàn thành
-- **Multiple Linear Regression** (Hồi quy tuyến tính đa biến với Normal Equation & Vectorized Gradient Descent)
-- **Logistic Regression** (Binary Classification, Sigmoid, Cross-Entropy Loss)
-- **Softmax Regression** (Multinomial Classification)
-- **Naive Bayes Classifier** (Gaussian Naive Bayes)
-- **Decision Tree** (Information Gain, Entropy, Gini Impurity)
-- **Random Forest** (Bagging & Feature Subsampling)
-- **Support Vector Machine (SVM)** (Hinge Loss, Kernel trick cơ bản)
+- [x] Linear Regression (Gradient Descent)
+- [x] Logistic Regression (Binary Cross-Entropy & Decision Boundary)
+- [x] K-Nearest Neighbors (KNN Classifier)
+- [ ] Multiple Linear Regression (Vectorized Gradient Descent & Normal Equation)
+- [ ] Softmax Regression (Multinomial Classification)
+- [ ] Naive Bayes Classifier
+- [ ] Decision Tree
+- [ ] Random Forest
+- [ ] Support Vector Machine (SVM)
 
 ### Học không giám sát (Unsupervised Learning)
-- **K-Means Clustering** (K-Means++ initialization, WCSS / Elbow method)
-- **Principal Component Analysis (PCA)** (Eigenvectors, SVD, Dimensionality Reduction)
+- [ ] K-Means Clustering
+- [ ] Principal Component Analysis (PCA)
 
 ### Mạng nơ-ron cơ bản (Deep Learning Basics)
-- **Perceptron** (Single-layer perceptron)
-- **Multi-Layer Perceptron (MLP)** (Neural Network from scratch với Forward Pass & Backpropagation)
+- [ ] Perceptron
+- [ ] Multi-Layer Perceptron (MLP with Backpropagation)
 
+---
 
 ## Tài liệu tham khảo
 
-1. **Machine Learning Specialization** – *Prof. Andrew Ng (Coursera / DeepLearning.AI)*
-2. **Machine Learning Cơ Bản** – *Vũ Hữu Tiệp (machinelearningcoban.com)*
-3. **Python Data Science Handbook** – *Jake VanderPlas*
-4. **Hands-On Machine Learning with Scikit-Learn, Keras, and TensorFlow** – *Aurélien Géron*
+1. Machine Learning Specialization – Andrew Ng (Coursera / DeepLearning.AI)
+2. Machine Learning Cơ Bản – Vũ Hữu Tiệp (machinelearningcoban.com)
+3. Python Data Science Handbook – Jake VanderPlas
 
+---
 
-## Bản quyền (License)
+## Giấy phép (License)
 
-Dự án được mở cho mục đích học tập và nghiên cứu cá nhân. Bạn hoàn toàn có thể tự do tham khảo, fork và phát triển thêm!
+Dự án được phân phối cho mục đích học tập và nghiên cứu cá nhân.
