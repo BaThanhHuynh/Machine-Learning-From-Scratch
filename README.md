@@ -23,6 +23,9 @@ Machine-Learning-From-Scratch/
 ├── logistic regression/
 │   ├── data_synthetic.csv         # Dữ liệu điểm thi và kết quả tuyển sinh
 │   └── logistic_regression.ipynb  # Hồi quy Logistic với Binary Cross-Entropy
+├── naive bayes/
+│   ├── data.csv                   # Tập dữ liệu ung thư vú (Breast Cancer Diagnostic)
+│   └── naive_bayes.ipynb          # Thuật toán Gaussian Naive Bayes từ con số 0
 └── README.md
 ``` 
 
@@ -68,6 +71,25 @@ Machine-Learning-From-Scratch/
 - **Kết quả:** Độ chính xác đạt **98.25%** với $k = 3$.
 
 
+### 4. Naive Bayes (Gaussian Naive Bayes)
+
+- **Mã nguồn:** `naive bayes/naive_bayes.ipynb`
+- **Dữ liệu:** `data.csv` (569 mẫu, 30 đặc trưng y tế liên tục, phân loại khối u lành tính B / ác tính M).
+- **Toán học & Giải thuật:**
+  - Định lý Bayes:
+    $$P(y|x) = \frac{P(x|y) P(y)}{P(x)} \propto P(y) P(x|y)$$
+  - Giả định độc lập có điều kiện: $P(x|y) = \prod_{j=1}^{D} P(x_j|y)$
+  - Phân phối chuẩn Gaussian cho đặc trưng liên tục:
+    $$P(x_j | y) = \frac{1}{\sqrt{2\pi\sigma_j^2}} \exp\left(-\frac{(x_j - \mu_j)^2}{2\sigma_j^2}\right)$$
+  - Xác suất hậu nghiệm và quyết định MAP (Maximum A Posteriori):
+    $$\hat{y} = \arg\max_{c} \left[ \log P(c) + \sum_{j=1}^{D} \log P(x_j | c) \right]$$
+    *(Sử dụng Log-Likelihood để tránh hiện tượng tràn số dưới - underflow khi nhân nhiều xác suất).*
+- **Tiền xử lý:**
+  - Loại bỏ cột định danh `id` và cột rỗng `Unnamed: 32`.
+  - Phân chia tập dữ liệu huấn luyện và kiểm thử (Train/Test: 80/20).
+- **Kết quả:** Độ chính xác đạt **~96.49%** trên tập kiểm thử (Test set).
+
+
 ## Cài đặt & Sử dụng 
 
 ### 1. Yêu cầu môi trường
@@ -92,9 +114,9 @@ Mở notebook tương ứng trong từng thư mục để xem mã nguồn và k�
 - [x] Linear Regression (Gradient Descent)
 - [x] Logistic Regression (Binary Cross-Entropy & Decision Boundary)
 - [x] K-Nearest Neighbors (KNN Classifier)
+- [x] Naive Bayes Classifier (Gaussian Naive Bayes)
 - [ ] Multiple Linear Regression (Vectorized Gradient Descent & Normal Equation)
 - [ ] Softmax Regression (Multinomial Classification)
-- [ ] Naive Bayes Classifier
 - [ ] Decision Tree
 - [ ] Random Forest
 - [ ] Support Vector Machine (SVM)
