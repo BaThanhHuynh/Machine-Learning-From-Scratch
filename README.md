@@ -14,6 +14,9 @@ Dự án tự học và cài đặt các thuật toán Machine Learning từ con
 
 ```text
 Machine-Learning-From-Scratch/
+├── decision tree/
+│   ├── Iris.csv                   # Tập dữ liệu hoa Iris (Fisher's Iris)
+│   └── decision_tree.ipynb        # Thuật toán cây quyết định (Entropy & Information Gain)
 ├── knn/
 │   ├── data.csv                   # Tập dữ liệu ung thư vú (Breast Cancer Diagnostic)
 │   └── knn.ipynb                  # Thuật toán K-Nearest Neighbors
@@ -27,7 +30,7 @@ Machine-Learning-From-Scratch/
 │   ├── data.csv                   # Tập dữ liệu ung thư vú (Breast Cancer Diagnostic)
 │   └── naive_bayes.ipynb          # Thuật toán Gaussian Naive Bayes từ con số 0
 └── README.md
-``` 
+```
 
 
 ## Các thuật toán đã triển khai
@@ -59,6 +62,7 @@ Machine-Learning-From-Scratch/
 - **Tiền xử lý:** Chuẩn hóa Z-score trực tiếp bằng NumPy ($X_{\text{scaled}} = \frac{X - \mu}{\sigma}$).
 - **Kết quả:** Learning rate $\alpha = 0.01$, 10.000 epochs. Chi phí giảm từ `0.6899` về `0.0595`. Độ chính xác đạt **98.00%**.
 
+---
 
 ### 3. K láng giềng gần nhất (K-Nearest Neighbors)
 
@@ -83,14 +87,31 @@ Machine-Learning-From-Scratch/
     $$P(x_j | y) = \frac{1}{\sqrt{2\pi\sigma_j^2}} \exp\left(-\frac{(x_j - \mu_j)^2}{2\sigma_j^2}\right)$$
   - Xác suất hậu nghiệm và quyết định MAP (Maximum A Posteriori):
     $$\hat{y} = \arg\max_{c} \left[ \log P(c) + \sum_{j=1}^{D} \log P(x_j | c) \right]$$
-    *(Sử dụng Log-Likelihood để tránh hiện tượng tràn số dưới - underflow khi nhân nhiều xác suất).*
-- **Tiền xử lý:**
-  - Loại bỏ cột định danh `id` và cột rỗng `Unnamed: 32`.
-  - Phân chia tập dữ liệu huấn luyện và kiểm thử (Train/Test: 80/20).
-- **Kết quả:** Độ chính xác đạt **~96.49%** trên tập kiểm thử (Test set).
+- **Tiền xử lý:** Loại bỏ cột định danh `id` và cột rỗng `Unnamed: 32`, chia tập Train/Test tỉ lệ 80/20.
+- **Kết quả:** Độ chính xác đạt **~96.49%** trên tập kiểm thử.
 
 
-## Cài đặt & Sử dụng 
+### 5. Cây quyết định (Decision Tree Classifier)
+
+- **Mã nguồn:** `decision tree/decision_tree.ipynb`
+- **Dữ liệu:** `decision tree/Iris.csv` (150 mẫu, 4 đặc trưng kích thước đài hoa và cánh hoa, phân loại 3 loài hoa Iris: Setosa, Versicolor, Virginica).
+- **Toán học & Giải thuật:**
+  - **Độ hỗn loạn thông tin (Shannon Entropy):**
+    $$H(S) = - \sum_{c \in C} p(c) \log_2(p(c))$$
+    với $p(c)$ là tỉ lệ số mẫu thuộc lớp $c$ trong tập $S$.
+  - **Độ lợi thông tin (Information Gain - IG):** Tiêu chí chọn đặc trưng và ngưỡng phân chia tối ưu:
+    $$IG(S, A, \theta) = H(S) - \left( \frac{|S_L|}{|S|} H(S_L) + \frac{|S_R|}{|S|} H(S_R) \right)$$
+    trong đó $S_L = \{x \in S \mid x_A \le \theta\}$ và $S_R = \{x \in S \mid x_A > \theta\}$.
+  - **Xây dựng cây nhị phân (Recursive Binary Splitting):**
+    - Duyệt qua toàn bộ đặc trưng và các ngưỡng giá trị (unique thresholds) để tìm cặp `(feature, threshold)` có $IG$ lớn nhất.
+    - Điều kiện dừng: đạt độ sâu tối đa (`max_depth = 2`), số mẫu nhỏ hơn `min_samples_split = 2`, hoặc $IG \le 0$.
+    - Nút lá gán nhãn theo đa số phiếu bầu (Majority Voting).
+  - **Dự đoán:** Duyệt cây đệ quy từ gốc đến nút lá theo ngưỡng điều kiện để suy luận nhãn cho mẫu mới.
+- **Tiền xử lý:** Tách ma trận đặc trưng $X$ và vector nhãn $y$, chia tập Train/Test tỉ lệ 80/20 (`random_state=123`).
+- **Kết quả:** Độ chính xác đạt **96.67%** trên tập kiểm thử (29/30 mẫu đúng) với độ sâu giới hạn `max_depth = 2`.
+
+
+## Cài đặt & Sử dụng
 
 ### 1. Yêu cầu môi trường
 - Python 3.8+
@@ -115,9 +136,9 @@ Mở notebook tương ứng trong từng thư mục để xem mã nguồn và k�
 - [x] Logistic Regression (Binary Cross-Entropy & Decision Boundary)
 - [x] K-Nearest Neighbors (KNN Classifier)
 - [x] Naive Bayes Classifier (Gaussian Naive Bayes)
+- [x] Decision Tree (Entropy & Information Gain)
 - [ ] Multiple Linear Regression (Vectorized Gradient Descent & Normal Equation)
 - [ ] Softmax Regression (Multinomial Classification)
-- [ ] Decision Tree
 - [ ] Random Forest
 - [ ] Support Vector Machine (SVM)
 
